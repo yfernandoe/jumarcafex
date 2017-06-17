@@ -33,4 +33,51 @@ class CafeCheckoutTest extends org.scalatest.FunSuite {
     assert(CafeCheckout.calculate(order) == 3.5f )
   }
 
+
+  test("Calculate only drinks"){
+    val order  = List("Cola","Coffee","Cola","Coffee","Cola","Coffee","Cola","Coffee","Cola","Coffee","Cola","Coffee","Cola","Coffee")
+
+    assert(CafeCheckout.calculate(order) == 10.5f)
+  }
+
+  test("Calculate only drinks with Service ch"){
+    val order  = List("Cola","Coffee","Cola","Coffee","Cola","Coffee","Cola","Coffee","Cola","Coffee","Cola","Coffee","Cola","Coffee")
+
+    assert(CafeCheckout.calculateWithServiceCharge(order) == 10.5f)
+  }
+
+
+  test("Calculate Cold food With Service 10%"){
+    val order  = List("Cola","Cheese Sandwich","Cola","Cheese Sandwich","Cola","Cheese Sandwich","Cola","Cheese Sandwich","Cola","Cheese Sandwich","Cola","Cheese Sandwich")
+    assert(CafeCheckout.calculate(order) == 15.0f)
+    assert(CafeCheckout.calculateWithServiceCharge(order) == 16.5f)
+  }
+
+  test("Calculate With Service for hot food 20%"){
+    val order  = List("Cola","Cheese Sandwich", "Steak Sandwich","Cola","Cheese Sandwich","Cola","Cheese Sandwich", "Steak Sandwich","Cola", "Steak Sandwich","Cheese Sandwich","Cola", "Steak Sandwich","Cheese Sandwich","Cola","Cheese Sandwich")
+    assert(CafeCheckout.calculate(order) == 33.0f)
+    assert(CafeCheckout.calculateWithServiceCharge(order) == 39.6f)
+  }
+
+  test("Calculate With Service > 20"){
+    val order  = List("Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich",
+      "Steak Sandwich","Steak Sandwich","Steak Sandwich","Steak Sandwich"
+    )
+
+    assert(CafeCheckout.calculateWithServiceCharge(order) == 272.0f)
+  }
+
+
 }
